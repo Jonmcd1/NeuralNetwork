@@ -1,0 +1,21 @@
+// Take rateMultiplier as an arg: (this is mutation rate modifier)
+	// rateMultiplier must be in (0, 1]
+		// 0 is no mutation, 1 is highest mutation (indivMutationRate = 1 would 
+		// mean 100% mutation on all weights)
+	// 
+	// Do borderline = indivMutationRate * rateMultiplier * 10000 to get a number,
+	// and get a random number [0, 10000]; if the random number is 
+	// BELOW (NOT equal to) borderline, mutate, otherwise, dont
+	// This is for each weight/anchor
+// Production of each winner: (# is indivMutationRate)
+	// -1, -1, 0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 0.9, 2
+	// -1 means no mutations, 2 means complete random
+
+// Intensity of a mutation if it occurs:
+	// signRand = floor((random(0, 1) * 2)) * 2 - 1
+	// x = static_cast<double>(rand() % 10000) / 10000
+	// currWeight += (0.01 ^ ((10 - 10 * indivMutationRate) * x)) * signRand
+		// for the random case, make currWeight equal x * signRand
+	// put currWeight in the range (-1, 1) if needed
+
+// Require the genSize be a multiple of 10
